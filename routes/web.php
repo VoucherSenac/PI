@@ -2,10 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ConsultaController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('consultas', ConsultaController::class);
+
 
 // CRUD de pacientes
 Route::resource('pacientes', PacienteController::class)->except(['destroy']);
