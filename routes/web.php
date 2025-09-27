@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
+use App\Http\Controllers\ConsultaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/fila', [PacienteController::class, 'fila'])->name('pacientes.fila');
     Route::post('/pacientes/{paciente}/fila', [PacienteController::class, 'adicionarFila'])->name('pacientes.fila.adicionar');
     Route::post('/pacientes/{paciente}/fila/remover', [PacienteController::class, 'removerFila'])->name('pacientes.fila.remover');
+
+    // Consultas (CRUD completo)
+    Route::resource('consultas', ConsultaController::class);
 });
 
 // Rotas de autenticação (Breeze)
