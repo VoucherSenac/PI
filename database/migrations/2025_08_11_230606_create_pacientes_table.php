@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sus')->nullable();
             $table->string('telefone')->nullable();
             $table->string('endereco')->nullable();
+            $table->date('data_nascimento')->nullable()->change();
             $table->timestamps();
         });
     }

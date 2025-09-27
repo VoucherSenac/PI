@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Pacientes</title>
-    @vite('resources/css/app.css')
-    @stack('styles')
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        {{-- Navegação padrão do Breeze --}}
+        @include('layouts.navigation')
 
-    <nav class="bg-blue-600 text-white p-4">
-        <ul class="flex space-x-4">
-            <li>
-                <a href="{{ route('pacientes.index') }}" 
-                   class="{{ request()->routeIs('pacientes.index') ? 'underline font-bold' : '' }}">
-                   Lista de Pacientes
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('pacientes.create') }}" 
-                   class="{{ request()->routeIs('pacientes.create') ? 'underline font-bold' : '' }}">
-                   Cadastrar Paciente
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('pacientes.fila') }}" 
-                   class="{{ request()->routeIs('pacientes.fila') ? 'underline font-bold' : '' }}">
-                   Fila
-                </a>
-            </li>
-        </ul>
-    </nav>
+        <!-- Cabeçalho opcional -->
+        @isset($header)
+            <header class="bg-white dark:bg-gray-800 shadow">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endisset
 
-    <div class="container mx-auto py-6">
-        @yield('content')
+        <!-- Conteúdo principal -->
+        <main>
+            {{ $slot }}
+        </main>
     </div>
-
-    @stack('scripts')
 </body>
 </html>

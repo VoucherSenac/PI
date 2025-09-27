@@ -21,6 +21,15 @@
                     <x-nav-link :href="route('pacientes.fila')" :active="request()->routeIs('pacientes.fila')">
                         {{ __('Fila') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('pacientes.create')" :active="request()->routeIs('pacientes.create')">
+                        {{ __('Cadastrar paciente') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.*')">
+                        {{ __('Consultas') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('consultas.create')" :active="request()->routeIs('consultas.create')">
+                        {{ __('Nova Consulta') }}
+                    </x-nav-link>
                 </div>
             </div>
 
