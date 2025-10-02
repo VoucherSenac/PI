@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="py-6 flex items-center justify-center bg-gray-100">
         <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full max-w-2xl">
             <form action="{{ route('pacientes.store') }}" method="POST">
                 @csrf

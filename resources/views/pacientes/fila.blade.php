@@ -1,6 +1,12 @@
 <x-app-layout>
-    <div class="px-4 sm:px-6 lg:px-8 py-6">
-        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 text-center">Fila de Atendimento</h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Fila de Atendimento') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-6 bg-gray-100">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full mx-auto max-w-6xl">
 
         @if(session('success'))
             <div class="bg-green-100 text-green-700 p-3 rounded mb-4 shadow-md text-center">
@@ -11,14 +17,14 @@
         @if($pacientes->isEmpty())
             <p class="text-gray-500 text-center">Nenhum paciente na fila.</p>
         @else
-            <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-                <table class="w-full border-collapse">
+            <div class="overflow-x-auto">
+                <table class="w-full">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <tr>
-                            <th class="border px-4 py-3 text-center">Nome</th>
-                            <th class="border px-4 py-3 text-center">CPF</th>
-                            <th class="border px-4 py-3 text-center">Telefone</th>
-                            <th class="border px-4 py-3 text-center">Classificação</th>
+                            <th class="px-4 py-3 text-center">Nome</th>
+                            <th class="px-4 py-3 text-center">CPF</th>
+                            <th class="px-4 py-3 text-center">Telefone</th>
+                            <th class="px-4 py-3 text-center">Classificação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +48,10 @@
                                 ];
                             @endphp
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="border px-4 py-3 text-center">{{ $paciente->nome }}</td>
-                                <td class="border px-4 py-3 text-center">{{ $paciente->cpf }}</td>
-                                <td class="border px-4 py-3 text-center">{{ $paciente->telefone }}</td>
-                                <td class="border px-4 py-3 text-center">
+                                <td class="px-4 py-3 text-center">{{ $paciente->nome }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->cpf }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->telefone }}</td>
+                                <td class="px-4 py-3 text-center">
                                     <span class="px-2 py-1 rounded text-white {{ $colorClasses[$paciente->cor] }}">
                                         {{ $labels[$paciente->cor] }}
                                     </span>

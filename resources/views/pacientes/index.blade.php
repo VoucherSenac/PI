@@ -1,8 +1,12 @@
 <x-app-layout>
-    <div class="px-4 sm:px-6 lg:px-8 py-6">
-        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 text-center">
-            Lista de Pacientes
-        </h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Lista de Pacientes') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-6 bg-gray-100">
+        <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-8 w-full mx-auto max-w-6xl">
 
         {{-- Mensagem de sucesso --}}
         @if(session('success'))
@@ -34,27 +38,27 @@
         @if($pacientes->isEmpty())
             <p class="text-gray-500 text-center">Nenhum paciente encontrado.</p>
         @else
-            <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg">
-                <table class="w-full border-collapse">
+            <div class="overflow-x-auto">
+                <table class="w-full ">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <tr>
-                            <th class="border px-4 py-3 text-center">Nome</th>
-                            <th class="border px-4 py-3 text-center">CPF</th>
-                            <th class="border px-4 py-3 text-center">SUS</th>
-                            <th class="border px-4 py-3 text-center">Telefone</th>
-                            <th class="border px-4 py-3 text-center">Triagem</th>
-                            <th class="border px-4 py-3 text-center">Fila</th>
-                            <th class="border px-4 py-3 text-center">Ações</th>
+                            <th class=" px-4 py-3 text-center">Nome</th>
+                            <th class=" px-4 py-3 text-center">CPF</th>
+                            <th class=" px-4 py-3 text-center">SUS</th>
+                            <th class=" px-4 py-3 text-center">Telefone</th>
+                            <th class=" px-4 py-3 text-center">Triagem</th>
+                            <th class=" px-4 py-3 text-center">Fila</th>
+                            <th class=" px-4 py-3 text-center">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($pacientes as $paciente)
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
-                                <td class="border px-4 py-3 text-center">{{ $paciente->nome }}</td>
-                                <td class="border px-4 py-3 text-center">{{ $paciente->cpf }}</td>
-                                <td class="border px-4 py-3 text-center">{{ $paciente->sus }}</td>
-                                <td class="border px-4 py-3 text-center">{{ $paciente->telefone }}</td>
-                                <td class="border px-4 py-3 text-center">
+                                <td class="px-4 py-3 text-center">{{ $paciente->nome }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->cpf }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->sus }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->telefone }}</td>
+                                <td class="px-4 py-3 text-center">
                                     @php
                                         $colors = [
                                             'vermelho' => 'bg-red-500',
@@ -69,10 +73,10 @@
                                         {{ ucfirst($paciente->cor ?? 'Sem') }}
                                     </span>
                                 </td>
-                                <td class="border px-4 py-3 text-center">
+                                <td class="px-4 py-3 text-center">
                                     {{ $paciente->em_fila ? 'Sim' : 'Não' }}
                                 </td>
-                                <td class="border px-4 py-3 flex justify-center gap-2">
+                                <td class="px-4 py-3 flex justify-center gap-2">
                                     <a href="{{ route('pacientes.edit', $paciente) }}" 
                                        class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
                                         Editar
