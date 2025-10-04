@@ -14,6 +14,10 @@ class Consulta extends Model
         'status'
     ];
 
+    protected $casts = [
+        'data_hora' => 'datetime',
+    ];
+
     // Relacionamentos
     public function paciente()
     {
@@ -25,4 +29,5 @@ class Consulta extends Model
         return $this->belongsTo(Medico::class);
     }
 }
+
 

@@ -45,7 +45,8 @@ class PacienteController extends Controller
             'sus'      => 'required|string|max:20|unique:pacientes,sus',
             'telefone' => 'nullable|string|max:20',
             'endereco' => 'nullable|string|max:255',
-            'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
+            'cor'      => 'nullable|string|in:emergente,muito urgente,urgente,pouco urgente,não urgente',
+            'consultorio_id' => 'nullable|exists:consultorios,id',
         ]);
 
         Paciente::create($data);
@@ -69,7 +70,7 @@ class PacienteController extends Controller
         if ($request->has('cor') && !$request->has('nome')) {
             // Atualização parcial (cor)
             $request->validate([
-                'cor' => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
+                'cor' => 'nullable|string|in:emergente,muito urgente,urgente,pouco urgente,não urgente',
             ]);
             $paciente->update($request->only(['cor']));
         } else {
@@ -80,7 +81,8 @@ class PacienteController extends Controller
                 'sus'      => 'required|string|max:20|unique:pacientes,sus,' . $paciente->id,
                 'telefone' => 'nullable|string|max:20',
                 'endereco' => 'nullable|string|max:255',
-                'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
+                'cor'      => 'nullable|string|in:emergente,muito urgente,urgente,pouco urgente,não urgente',
+                'consultorio_id' => 'nullable|exists:consultorios,id',
             ]);
             $paciente->update($data);
         }
@@ -93,9 +95,13 @@ class PacienteController extends Controller
      */
     public function destroy(Paciente $paciente)
     {
+        // Deletar consultas associadas
+        $paciente->consultas()->delete();
+
         $paciente->delete();
         return redirect()->route('pacientes.index')->with('success', 'Paciente deletado com sucesso!');
     }
+
 
     /**
      * Mostrar pacientes na fila, ordenados por prioridade
@@ -103,7 +109,7 @@ class PacienteController extends Controller
     public function fila()
     {
         $pacientes = Paciente::where('em_fila', true)
-            ->orderByRaw("FIELD(cor,'vermelho','laranja','amarelo','verde','azul','') DESC")
+            ->orderByRaw("FIELD(cor,'emergente','muito urgente','urgente','pouco urgente','não urgente','') DESC")
             ->paginate(10);
 
         return view('pacientes.fila', compact('pacientes'));

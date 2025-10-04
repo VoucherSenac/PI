@@ -18,11 +18,11 @@
         {{-- Barra de ações --}}
         <div class="mb-4 flex justify-between items-center">
             <form method="GET" action="{{ route('pacientes.index') }}" class="flex gap-2">
-                <input 
-                    type="text" 
-                    name="search" 
-                    value="{{ request('search') }}" 
-                    placeholder="Buscar paciente..." 
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Buscar paciente..."
                     class="border rounded p-2 dark:bg-gray-700 dark:text-gray-200"
                 >
                 <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
@@ -59,25 +59,24 @@
                                 <td class="px-4 py-3 text-center">{{ $paciente->sus }}</td>
                                 <td class="px-4 py-3 text-center">{{ $paciente->telefone }}</td>
                                 <td class="px-4 py-3 text-center">
-                                    @php
-                                        $colors = [
-                                            'vermelho' => 'bg-red-500',
-                                            'laranja' => 'bg-orange-500',
-                                            'amarelo' => 'bg-yellow-400',
-                                            'verde' => 'bg-green-500',
-                                            'azul' => 'bg-blue-500',
-                                            '' => 'bg-gray-300'
-                                        ];
-                                    @endphp
-                                    <span class="px-2 py-1 text-white rounded {{ $colors[$paciente->cor] ?? 'bg-gray-300' }}">
-                                        {{ ucfirst($paciente->cor ?? 'Sem') }}
-                                    </span>
+                                    <form action="{{ route('pacientes.update', $paciente) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('PUT')
+                                        <select name="cor" onchange="this.form.submit()" class="border border-gray-300 dark:border-gray-700 p-1 rounded text-sm focus:ring-blue-500 focus:border-blue-500">
+                                            <option value="">--</option>
+                                            <option value="emergente" {{ $paciente->cor == 'emergente' ? 'selected' : '' }}>Emergente</option>
+                                            <option value="muito urgente" {{ $paciente->cor == 'muito urgente' ? 'selected' : '' }}>Muito Urgente</option>
+                                            <option value="urgente" {{ $paciente->cor == 'urgente' ? 'selected' : '' }}>Urgente</option>
+                                            <option value="pouco urgente" {{ $paciente->cor == 'pouco urgente' ? 'selected' : '' }}>Pouco Urgente</option>
+                                            <option value="não urgente" {{ $paciente->cor == 'não urgente' ? 'selected' : '' }}>Não Urgente</option>
+                                        </select>
+                                    </form>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     {{ $paciente->em_fila ? 'Sim' : 'Não' }}
                                 </td>
                                 <td class="px-4 py-3 flex justify-center gap-2">
-                                    <a href="{{ route('pacientes.edit', $paciente) }}" 
+                                    <a href="{{ route('pacientes.edit', $paciente) }}"
                                        class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
                                         Editar
                                     </a>
@@ -109,4 +108,14 @@
             </div>
         @endif
     </div>
+
+    <script>
+        let timeout;
+        document.querySelector('input[name="search"]').addEventListener('keyup', function() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                this.form.submit();
+            }, 500);
+        });
+    </script>
 </x-app-layout>

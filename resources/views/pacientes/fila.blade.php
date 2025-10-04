@@ -22,38 +22,36 @@
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <tr>
                             <th class="px-4 py-3 text-center">Nome</th>
-                            <th class="px-4 py-3 text-center">CPF</th>
-                            <th class="px-4 py-3 text-center">Telefone</th>
-                            <th class="px-4 py-3 text-center">Classificação</th>
+                            <th class="px-4 py-3 text-center">Consultório</th>
+                            <th class="px-4 py-3 text-center">Prioridade</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($pacientes as $paciente)
                             @php
                                 $labels = [
-                                    'vermelho' => 'Emergente',
-                                    'laranja'  => 'Muito Urgente',
-                                    'amarelo'  => 'Urgente',
-                                    'verde'    => 'Pouco Urgente',
-                                    'azul'     => 'Não Urgente',
+                                    'emergente' => 'Emergente',
+                                    'muito urgente'  => 'Muito Urgente',
+                                    'urgente'  => 'Urgente',
+                                    'pouco urgente'    => 'Pouco Urgente',
+                                    'não urgente'     => 'Não Urgente',
                                     ''         => 'Sem classificação'
                                 ];
                                 $colorClasses = [
-                                    'vermelho' => 'bg-red-500',
-                                    'laranja'  => 'bg-orange-500',
-                                    'amarelo'  => 'bg-yellow-500',
-                                    'verde'    => 'bg-green-500',
-                                    'azul'     => 'bg-blue-500',
+                                    'emergente' => 'bg-red-500',
+                                    'muito urgente'  => 'bg-orange-500',
+                                    'urgente'  => 'bg-yellow-500',
+                                    'pouco urgente'    => 'bg-green-500',
+                                    'não urgente'     => 'bg-blue-500',
                                     ''         => 'bg-gray-500'
                                 ];
                             @endphp
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-3 text-center">{{ $paciente->nome }}</td>
-                                <td class="px-4 py-3 text-center">{{ $paciente->cpf }}</td>
-                                <td class="px-4 py-3 text-center">{{ $paciente->telefone }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->consultorio->nome ?? 'N/A' }}</td>
                                 <td class="px-4 py-3 text-center">
-                                    <span class="px-2 py-1 rounded text-white {{ $colorClasses[$paciente->cor] }}">
-                                        {{ $labels[$paciente->cor] }}
+                                    <span class="px-2 py-1 rounded text-white {{ $colorClasses[$paciente->cor] ?? 'bg-gray-500' }}">
+                                        {{ $labels[$paciente->cor] ?? 'Sem classificação' }}
                                     </span>
                                 </td>
                             </tr>
@@ -68,3 +66,25 @@
         @endif
     </div>
 </x-app-layout>
+
+<script>
+    // Atualiza a fila automaticamente a cada 5 segundos
+    setInterval(() => {
+        fetch(window.location.href, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newTable = doc.querySelector('tbody');
+            const currentTable = document.querySelector('tbody');
+            if (newTable && currentTable) {
+                currentTable.innerHTML = newTable.innerHTML;
+            }
+        })
+        .catch(error => console.error('Erro ao atualizar a fila:', error));
+    }, 5000);
+</script>

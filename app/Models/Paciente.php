@@ -22,6 +22,7 @@ class Paciente extends Model
         'cor',
         'marcado',
         'em_fila',
+        'consultorio_id',
     ];
 
     /**
@@ -31,6 +32,19 @@ class Paciente extends Model
         'marcado' => 'boolean',
         'em_fila' => 'boolean',
     ];
+
+    /**
+     * Relacionamentos
+     */
+    public function consultorio()
+    {
+        return $this->belongsTo(Consultorio::class);
+    }
+
+    public function consultas()
+    {
+        return $this->hasMany(Consulta::class);
+    }
 
     /**
      * Scopes úteis para filtros

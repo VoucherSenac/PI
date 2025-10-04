@@ -35,10 +35,19 @@ class ConsultaController extends Controller
                          ->with('success', 'Consulta criada com sucesso!');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // Carregar consultas junto com paciente e médico
-        $consultas = Consulta::with(['paciente', 'medico'])->get();
+        $query = Consulta::with(['paciente', 'medico']);
+
+        if ($search = $request->get('search')) {
+            $query->whereHas('paciente', function ($q) use ($search) {
+                $q->where('nome', 'like', "%{$search}%");
+            })->orWhereHas('medico', function ($q) use ($search) {
+                $q->where('nome', 'like', "%{$search}%");
+            })->orWhere('status', 'like', "%{$search}%");
+        }
+
+        $consultas = $query->get();
 
         return view('consultas.index', compact('consultas'));
     }
