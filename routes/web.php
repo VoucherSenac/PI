@@ -21,6 +21,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Apresentação
+Route::get('/apresentacao', function () {
+    return view('apresentacao');
+})->middleware(['auth', 'verified'])->name('apresentacao');
+
 // Rotas protegidas por autenticação
 Route::middleware('auth')->group(function () {
     // Perfil (Breeze)
