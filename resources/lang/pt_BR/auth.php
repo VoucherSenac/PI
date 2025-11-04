@@ -41,4 +41,20 @@ return [
     'If you did not receive the email, we will gladly send you another.' => 'Se você não recebeu o e-mail, ficaremos felizes em enviar outro.',
     'Resend Verification Email' => 'Reenviar E-mail de Verificação',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Navigation Labels
+    |--------------------------------------------------------------------------
+    */
+
+    'Dashboard' => 'Painel',
+    'Apresentação' => 'Apresentação',
+    'Pacientes' => 'Pacientes',
+    'Fila' => 'Fila',
+    'Cadastrar paciente' => 'Cadastrar paciente',
+    'Consultas' => 'Consultas',
+    'Nova Consulta' => 'Nova Consulta',
+    'Profile' => 'Perfil',
+    'Log Out' => 'Sair',
+
 ];

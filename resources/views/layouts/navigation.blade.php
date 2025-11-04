@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Painel
                     </x-nav-link>
                     <x-nav-link :href="route('apresentacao')" :active="request()->routeIs('apresentacao')">
                         {{ __('Apresentação') }}
@@ -53,7 +53,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            Perfil
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -63,7 +63,7 @@
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                Sair
                             </x-dropdown-link>
                         </form>
                     </x-slot>
