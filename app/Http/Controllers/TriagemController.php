@@ -83,9 +83,15 @@ class TriagemController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Paciente $paciente)
     {
-        //
+        $triagem = $paciente->triagens()->latest()->first();
+
+        if (!$triagem) {
+            return redirect()->route('pacientes.index')->with('error', 'Este paciente ainda não possui triagem.');
+        }
+
+        return view('triagens.show', compact('paciente', 'triagem'));
     }
 
     /**

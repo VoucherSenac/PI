@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     // Triagens
     Route::get('/pacientes/{paciente}/triagem', [TriagemController::class, 'create'])->name('triagens.create');
     Route::post('/pacientes/{paciente}/triagem', [TriagemController::class, 'store'])->name('triagens.store');
+    Route::get('/pacientes/{paciente}/triagem/show', [TriagemController::class, 'show'])->name('triagens.show');
 });
 
 // Rotas de autenticação (Breeze)

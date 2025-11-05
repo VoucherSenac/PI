@@ -89,10 +89,17 @@
                                        class="bg-yellow-500 text-white px-2 py-1 rounded text-sm hover:bg-yellow-600 mb-1">
                                         Editar
                                     </a>
-                                    <a href="{{ route('triagens.create', $paciente) }}"
-                                       class="bg-purple-600 text-white px-2 py-1 rounded text-sm hover:bg-purple-700 mb-1">
-                                        Triagem
-                                    </a>
+                                    @if($paciente->triagens()->exists())
+                                        <a href="{{ route('triagens.show', $paciente) }}"
+                                           class="bg-blue-600 text-white px-2 py-1 rounded text-sm hover:bg-blue-700 mb-1">
+                                            Ver Triagem
+                                        </a>
+                                    @else
+                                        <a href="{{ route('triagens.create', $paciente) }}"
+                                           class="bg-purple-600 text-white px-2 py-1 rounded text-sm hover:bg-purple-700 mb-1">
+                                            Triagem
+                                        </a>
+                                    @endif
                                     @if(!$paciente->em_fila)
                                         <form action="{{ route('pacientes.fila.adicionar', $paciente) }}" method="POST" class="inline">
                                             @csrf
