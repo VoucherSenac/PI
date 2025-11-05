@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\ConsultaController;
+use App\Http\Controllers\TriagemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
 
     // Consultas (CRUD completo)
     Route::resource('consultas', ConsultaController::class);
+
+    // Triagens
+    Route::get('/pacientes/{paciente}/triagem', [TriagemController::class, 'create'])->name('triagens.create');
+    Route::post('/pacientes/{paciente}/triagem', [TriagemController::class, 'store'])->name('triagens.store');
 });
 
 // Rotas de autenticação (Breeze)

@@ -103,8 +103,28 @@ class PacienteController extends Controller
     public function fila()
     {
         $pacientes = Paciente::where('em_fila', true)
-            ->orderByRaw("FIELD(cor,'vermelho','laranja','amarelo','verde','azul','') DESC")
-            ->paginate(10);
+            ->get()
+            ->sortBy(function ($paciente) {
+                $prioridades = [
+                    'vermelho' => 5,
+                    'laranja' => 4,
+                    'amarelo' => 3,
+                    'verde' => 2,
+                    'azul' => 1,
+                    '' => 0,
+                ];
+                return $prioridades[$paciente->cor] ?? 0;
+            })
+            ->reverse()
+            ->values();
+
+        $pacientes = new \Illuminate\Pagination\LengthAwarePaginator(
+            $pacientes->forPage(request('page', 1), 10),
+            $pacientes->count(),
+            10,
+            request('page', 1),
+            ['path' => request()->url(), 'pageName' => 'page']
+        );
 
         return view('pacientes.fila', compact('pacientes'));
     }

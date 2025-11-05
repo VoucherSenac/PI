@@ -36,7 +36,7 @@
                                     'amarelo'  => 'Urgente',
                                     'verde'    => 'Pouco Urgente',
                                     'azul'     => 'Não Urgente',
-                                    ''         => 'Sem classificação'
+                                    ''         => 'Não triado'
                                 ];
                                 $colorClasses = [
                                     'vermelho' => 'bg-red-500',

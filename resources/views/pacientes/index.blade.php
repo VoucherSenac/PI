@@ -46,7 +46,7 @@
                             <th class=" px-4 py-3 text-center">CPF</th>
                             <th class=" px-4 py-3 text-center">SUS</th>
                             <th class=" px-4 py-3 text-center">Telefone</th>
-                            <th class=" px-4 py-3 text-center">Triagem</th>
+                            <th class=" px-4 py-3 text-center">Gravidade</th>
                             <th class=" px-4 py-3 text-center">Fila</th>
                             <th class=" px-4 py-3 text-center">Ações</th>
                         </tr>
@@ -68,30 +68,42 @@
                                             'azul' => 'bg-blue-500',
                                             '' => 'bg-gray-300'
                                         ];
+                                        $gravidades = [
+                                            'vermelho' => 'Emergência',
+                                            'laranja' => 'Muito Urgente',
+                                            'amarelo' => 'Urgente',
+                                            'verde' => 'Pouco Urgente',
+                                            'azul' => 'Não Urgente',
+                                            '' => 'Sem Triagem'
+                                        ];
                                     @endphp
                                     <span class="px-2 py-1 text-white rounded {{ $colors[$paciente->cor] ?? 'bg-gray-300' }}">
-                                        {{ ucfirst($paciente->cor ?? 'Sem') }}
+                                        {{ $gravidades[$paciente->cor] ?? 'Sem Triagem' }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     {{ $paciente->em_fila ? 'Sim' : 'Não' }}
                                 </td>
-                                <td class="px-4 py-3 flex justify-center gap-2">
-                                    <a href="{{ route('pacientes.edit', $paciente) }}" 
-                                       class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">
+                                <td class="px-4 py-3 flex justify-center gap-2 flex-wrap">
+                                    <a href="{{ route('pacientes.edit', $paciente) }}"
+                                       class="bg-yellow-500 text-white px-2 py-1 rounded text-sm hover:bg-yellow-600 mb-1">
                                         Editar
                                     </a>
+                                    <a href="{{ route('triagens.create', $paciente) }}"
+                                       class="bg-purple-600 text-white px-2 py-1 rounded text-sm hover:bg-purple-700 mb-1">
+                                        Triagem
+                                    </a>
                                     @if(!$paciente->em_fila)
-                                        <form action="{{ route('pacientes.fila.adicionar', $paciente) }}" method="POST">
+                                        <form action="{{ route('pacientes.fila.adicionar', $paciente) }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700">
+                                            <button type="submit" class="bg-green-600 text-white px-2 py-1 rounded text-sm hover:bg-green-700">
                                                 Adicionar Fila
                                             </button>
                                         </form>
                                     @else
-                                        <form action="{{ route('pacientes.fila.remover', $paciente) }}" method="POST">
+                                        <form action="{{ route('pacientes.fila.remover', $paciente) }}" method="POST" class="inline">
                                             @csrf
-                                            <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                                            <button type="submit" class="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600">
                                                 Remover Fila
                                             </button>
                                         </form>

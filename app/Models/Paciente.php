@@ -55,4 +55,14 @@ class Paciente extends Model
     {
         return $query->where('em_fila', true);
     }
+
+    public function triagens()
+    {
+        return $this->hasMany(Triagem::class);
+    }
+
+    public function ultimaTriagem()
+    {
+        return $this->hasOne(Triagem::class)->latest();
+    }
 }
