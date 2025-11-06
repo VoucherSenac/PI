@@ -26,3 +26,18 @@
 - [x] Passo 7: Traduzir navigation.blade.php (Perfil e Sair)
 - [x] Passo 8: Adicionar botão Voltar nas telas de autenticação
 - [x] Passo 9: Adicionar botões de navegação entre login e cadastro
+
+# TODO: Implementar limpeza automática da fila de pacientes
+
+## Passos a serem executados:
+
+1. **Criar comando Artisan**: Criar um comando para limpar a fila de pacientes.
+
+2. **Agendar execução diária**: Configurar o comando para executar diariamente às 00:00.
+
+3. **Testar comando**: Executar o comando manualmente para verificar se funciona.
+
+## Status:
+- [x] Passo 1: Criar comando `app:clear-queue`
+- [x] Passo 2: Agendar execução diária em `routes/console.php`
+- [x] Passo 3: Testar comando (executado com sucesso)

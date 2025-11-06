@@ -42,6 +42,7 @@ class PacienteController extends Controller
         $data = $request->validate([
             'nome'     => 'required|string|max:255',
             'cpf'      => 'required|string|max:14|unique:pacientes,cpf',
+            'data_nascimento' => 'nullable|date',
             'sus'      => 'required|string|max:20|unique:pacientes,sus',
             'telefone' => 'nullable|string|max:20',
             'endereco' => 'nullable|string|max:255',
@@ -77,6 +78,7 @@ class PacienteController extends Controller
             $data = $request->validate([
                 'nome'     => 'required|string|max:255',
                 'cpf'      => 'required|string|max:14|unique:pacientes,cpf,' . $paciente->id,
+                'data_nascimento' => 'nullable|date',
                 'sus'      => 'required|string|max:20|unique:pacientes,sus,' . $paciente->id,
                 'telefone' => 'nullable|string|max:20',
                 'endereco' => 'nullable|string|max:255',
