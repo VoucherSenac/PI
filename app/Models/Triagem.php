@@ -18,6 +18,7 @@ class Triagem extends Model
         'bebe',
         'medicamentos_uso',
         'gravidade',
+        'consultorio_id',
     ];
 
     protected $casts = [
@@ -28,5 +29,10 @@ class Triagem extends Model
     public function paciente()
     {
         return $this->belongsTo(Paciente::class);
+    }
+
+    public function consultorio()
+    {
+        return $this->belongsTo(Consultorio::class);
     }
 }

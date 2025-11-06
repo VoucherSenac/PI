@@ -22,6 +22,8 @@ class Paciente extends Model
         'cor',
         'marcado',
         'em_fila',
+        'consultorio',
+        'doutor',
     ];
 
     /**

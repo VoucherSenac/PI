@@ -118,6 +118,17 @@
                     </div>
                 </div>
 
+                {{-- Consultório --}}
+                <div>
+                    <label for="consultorio_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Consultório</label>
+                    <select id="consultorio_id" name="consultorio_id" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                        <option value="">Selecione um consultório (opcional)</option>
+                        @foreach($consultorios as $consultorio)
+                            <option value="{{ $consultorio->id }}">{{ $consultorio->numero }} - {{ $consultorio->doutor }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 {{-- Botões --}}
                 <div class="flex justify-end space-x-4">
                     <a href="{{ route('pacientes.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">

@@ -22,8 +22,8 @@
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         <tr>
                             <th class="px-4 py-3 text-center">Nome</th>
-                            <th class="px-4 py-3 text-center">CPF</th>
-                            <th class="px-4 py-3 text-center">Telefone</th>
+                            <th class="px-4 py-3 text-center">Consultório</th>
+                            <th class="px-4 py-3 text-center">Doutor</th>
                             <th class="px-4 py-3 text-center">Classificação</th>
                         </tr>
                     </thead>
@@ -49,8 +49,8 @@
                             @endphp
                             <tr class="hover:bg-gray-100 dark:hover:bg-gray-700">
                                 <td class="px-4 py-3 text-center">{{ $paciente->nome }}</td>
-                                <td class="px-4 py-3 text-center">{{ $paciente->cpf }}</td>
-                                <td class="px-4 py-3 text-center">{{ $paciente->telefone }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->ultimaTriagem->consultorio->numero ?? 'N/A' }}</td>
+                                <td class="px-4 py-3 text-center">{{ $paciente->ultimaTriagem->consultorio->doutor ?? 'N/A' }}</td>
                                 <td class="px-4 py-3 text-center">
                                     <span class="px-2 py-1 rounded text-white {{ $colorClasses[$paciente->cor] }}">
                                         {{ $labels[$paciente->cor] }}

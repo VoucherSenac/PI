@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Paciente;
 use App\Models\Triagem;
+use App\Models\Consultorio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -22,7 +23,8 @@ class TriagemController extends Controller
      */
     public function create(Paciente $paciente)
     {
-        return view('triagens.create', compact('paciente'));
+        $consultorios = Consultorio::all();
+        return view('triagens.create', compact('paciente', 'consultorios'));
     }
 
     /**
@@ -43,6 +45,7 @@ class TriagemController extends Controller
             'bebe' => 'boolean',
             'medicamentos_uso' => 'nullable|string',
             'gravidade' => 'required|in:vermelho,laranja,amarelo,verde,azul',
+            'consultorio_id' => 'nullable|exists:consultorios,id',
         ], [
             'queixa_principal.required' => 'A queixa principal é obrigatória.',
             'queixa_principal.string' => 'A queixa principal deve ser um texto.',
@@ -54,6 +57,7 @@ class TriagemController extends Controller
             'medicamentos_uso.string' => 'Os medicamentos em uso devem ser um texto.',
             'gravidade.required' => 'A gravidade é obrigatória.',
             'gravidade.in' => 'A gravidade selecionada é inválida.',
+            'consultorio_id.exists' => 'O consultório selecionado é inválido.',
         ]);
 
         if ($validator->fails()) {

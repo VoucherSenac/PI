@@ -47,6 +47,8 @@ class PacienteController extends Controller
             'telefone' => 'nullable|string|max:20',
             'endereco' => 'nullable|string|max:255',
             'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
+            'consultorio' => 'nullable|string|max:255',
+            'doutor' => 'nullable|string|max:255',
         ]);
 
         Paciente::create($data);
@@ -83,6 +85,8 @@ class PacienteController extends Controller
                 'telefone' => 'nullable|string|max:20',
                 'endereco' => 'nullable|string|max:255',
                 'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
+                'consultorio' => 'nullable|string|max:255',
+                'doutor' => 'nullable|string|max:255',
             ]);
             $paciente->update($data);
         }
