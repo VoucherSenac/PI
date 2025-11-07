@@ -76,6 +76,48 @@
                     <textarea id="medicamentos_uso" name="medicamentos_uso" rows="2" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" placeholder="Liste medicamentos atualmente em uso"></textarea>
                 </div>
 
+                {{-- Sinais Vitais --}}
+                <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-400">
+                    <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Sinais Vitais</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div>
+                            <label for="pressao_sistolica" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pressão Sistólica *</label>
+                            <input type="number" id="pressao_sistolica" name="pressao_sistolica" min="0" max="300"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="pressao_diastolica" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pressão Diastólica *</label>
+                            <input type="number" id="pressao_diastolica" name="pressao_diastolica" min="0" max="200"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="frequencia_cardiaca" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Freq. Cardíaca (bpm) *</label>
+                            <input type="number" id="frequencia_cardiaca" name="frequencia_cardiaca" min="0" max="300"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="temperatura" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Temperatura (°C) *</label>
+                            <input type="number" step="0.1" id="temperatura" name="temperatura" min="0" max="99.9"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="peso" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Peso (kg) *</label>
+                            <input type="number" step="0.01" id="peso" name="peso" min="0" max="999.99"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="altura" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Altura (m) *</label>
+                            <input type="number" step="0.01" id="altura" name="altura" min="0" max="9.99"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                        <div>
+                            <label for="frequencia_respiratoria" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Freq. Respiratória (rpm) *</label>
+                            <input type="number" id="frequencia_respiratoria" name="frequencia_respiratoria" min="0" max="100"
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                        </div>
+                    </div>
+                </div>
+
                 {{-- Gravidade --}}
                 <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400">
                     <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Gravidade *</h3>

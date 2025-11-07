@@ -45,6 +45,10 @@ Route::middleware('auth')->group(function () {
     // Consultas (CRUD completo)
     Route::resource('consultas', ConsultaController::class);
 
+    // Atendimento médico
+    Route::get('/pacientes/{paciente}/atendimento', [ConsultaController::class, 'atendimento'])->name('pacientes.atendimento');
+    Route::post('/pacientes/{paciente}/atendimento', [ConsultaController::class, 'storeAtendimento'])->name('pacientes.atendimento.store');
+
     // Triagens
     Route::get('/pacientes/{paciente}/triagem', [TriagemController::class, 'create'])->name('triagens.create');
     Route::post('/pacientes/{paciente}/triagem', [TriagemController::class, 'store'])->name('triagens.store');

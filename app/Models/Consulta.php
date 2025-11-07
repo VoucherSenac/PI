@@ -11,7 +11,19 @@ class Consulta extends Model
         'medico_id',
         'data_hora',
         'observacoes',
-        'status'
+        'status',
+        'hipoteses_diagnosticas',
+        'condicao_fisica',
+        'exames_necessarios',
+        'medicamentos_receitados',
+        'observacoes_atendimento',
+        'peso',
+        'altura',
+        'temperatura',
+        'pressao_sistolica',
+        'pressao_diastolica',
+        'frequencia_cardiaca',
+        'frequencia_respiratoria'
     ];
 
     // Relacionamentos

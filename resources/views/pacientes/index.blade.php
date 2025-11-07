@@ -94,6 +94,12 @@
                                            class="bg-blue-600 text-white px-2 py-1 rounded text-sm hover:bg-blue-700 mb-1">
                                             Ver Triagem
                                         </a>
+                                        @if($paciente->em_fila)
+                                            <a href="{{ route('pacientes.atendimento', $paciente) }}"
+                                               class="bg-indigo-600 text-white px-2 py-1 rounded text-sm hover:bg-indigo-700 mb-1">
+                                                Atender
+                                            </a>
+                                        @endif
                                     @else
                                         <a href="{{ route('triagens.create', $paciente) }}"
                                            class="bg-purple-600 text-white px-2 py-1 rounded text-sm hover:bg-purple-700 mb-1">

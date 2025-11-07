@@ -42,5 +42,46 @@ class ConsultaController extends Controller
 
         return view('consultas.index', compact('consultas'));
     }
+
+    public function atendimento(Paciente $paciente)
+    {
+        $triagem = $paciente->triagens()->latest()->first();
+
+        if (!$triagem) {
+            return redirect()->route('pacientes.index')->with('error', 'Este paciente ainda não possui triagem.');
+        }
+
+        return view('consultas.atendimento', compact('paciente', 'triagem'));
+    }
+
+    public function storeAtendimento(Request $request, Paciente $paciente)
+    {
+        $request->validate([
+            'hipoteses_diagnosticas' => 'nullable|string',
+            'condicao_fisica' => 'nullable|string',
+            'exames_necessarios' => 'nullable|string',
+            'medicamentos_receitados' => 'nullable|string',
+            'observacoes_atendimento' => 'nullable|string',
+        ]);
+
+        $consulta = Consulta::create([
+            'paciente_id' => $paciente->id,
+            'medico_id' => auth()->id(), // Assumindo que o médico logado é o usuário atual
+            'data_hora' => now(),
+            'status' => 'concluida',
+            ...$request->only([
+                'hipoteses_diagnosticas',
+                'condicao_fisica',
+                'exames_necessarios',
+                'medicamentos_receitados',
+                'observacoes_atendimento'
+            ])
+        ]);
+
+        // Remover paciente da fila após atendimento
+        $paciente->update(['em_fila' => false]);
+
+        return redirect()->route('pacientes.index')->with('success', 'Atendimento realizado com sucesso!');
+    }
 }
 

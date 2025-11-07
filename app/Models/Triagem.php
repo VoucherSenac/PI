@@ -17,6 +17,13 @@ class Triagem extends Model
         'fuma',
         'bebe',
         'medicamentos_uso',
+        'pressao_sistolica',
+        'pressao_diastolica',
+        'frequencia_cardiaca',
+        'temperatura',
+        'peso',
+        'altura',
+        'frequencia_respiratoria',
         'gravidade',
         'consultorio_id',
     ];

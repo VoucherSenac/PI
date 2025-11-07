@@ -32,6 +32,7 @@ class Paciente extends Model
     protected $casts = [
         'marcado' => 'boolean',
         'em_fila' => 'boolean',
+        'data_nascimento' => 'date',
     ];
 
     /**
