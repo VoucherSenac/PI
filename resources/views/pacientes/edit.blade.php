@@ -25,7 +25,7 @@
 
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Data de Nascimento</label>
-                    <input type="date" name="data_nascimento" value="{{ old('data_nascimento', $paciente->data_nascimento ? $paciente->data_nascimento->format('Y-m-d') : '') }}" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    <input type="date" name="data_nascimento" value="{{ old('data_nascimento', $paciente->data_nascimento ? \Carbon\Carbon::parse($paciente->data_nascimento)->format('Y-m-d') : '') }}" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
                 </div>
 
                 <div class="mb-6">
@@ -36,28 +36,6 @@
                 <div class="mb-6">
                     <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Endereço</label>
                     <input type="text" name="endereco" value="{{ old('endereco', $paciente->endereco) }}" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Consultório</label>
-                    <input type="text" name="consultorio" value="{{ old('consultorio', $paciente->consultorio) }}" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Doutor</label>
-                    <input type="text" name="doutor" value="{{ old('doutor', $paciente->doutor) }}" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                </div>
-
-                <div class="mb-6">
-                    <label class="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-300">Triagem</label>
-                    <select name="cor" class="border border-gray-300 dark:border-gray-700 p-3 w-full rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                        <option value="">--</option>
-                        <option value="vermelho" {{ $paciente->cor == 'vermelho' ? 'selected' : '' }}>Emergente</option>
-                        <option value="laranja" {{ $paciente->cor == 'laranja' ? 'selected' : '' }}>Muito Urgente</option>
-                        <option value="amarelo" {{ $paciente->cor == 'amarelo' ? 'selected' : '' }}>Urgente</option>
-                        <option value="verde" {{ $paciente->cor == 'verde' ? 'selected' : '' }}>Pouco Urgente</option>
-                        <option value="azul" {{ $paciente->cor == 'azul' ? 'selected' : '' }}>Não Urgente</option>
-                    </select>
                 </div>
 
                 <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Atualizar</button>

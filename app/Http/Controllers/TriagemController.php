@@ -109,9 +109,29 @@ class TriagemController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Paciente $paciente, Triagem $triagem)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'gravidade' => 'required|in:vermelho,laranja,amarelo,verde,azul',
+        ], [
+            'gravidade.required' => 'A gravidade é obrigatória.',
+            'gravidade.in' => 'A gravidade selecionada é inválida.',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $data = $validator->validated();
+
+        $triagem->update($data);
+
+        // Atualizar cor do paciente baseada na gravidade da triagem
+        $paciente->update(['cor' => $triagem->gravidade]);
+
+        return redirect()->back()->with('success', 'Gravidade atualizada com sucesso!');
     }
 
     /**

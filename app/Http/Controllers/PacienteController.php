@@ -21,7 +21,7 @@ class PacienteController extends Controller
                   ->orWhere('sus', 'like', "%{$search}%");
         }
 
-        $pacientes = $query->paginate(10);
+        $pacientes = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('pacientes.index', compact('pacientes'));
     }
@@ -47,8 +47,6 @@ class PacienteController extends Controller
             'telefone' => 'nullable|string|max:20',
             'endereco' => 'nullable|string|max:255',
             'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
-            'consultorio' => 'nullable|string|max:255',
-            'doutor' => 'nullable|string|max:255',
         ]);
 
         Paciente::create($data);
@@ -65,31 +63,20 @@ class PacienteController extends Controller
     }
 
     /**
-     * Atualizar paciente (full ou parcial para cor)
+     * Atualizar paciente
      */
     public function update(Request $request, Paciente $paciente)
     {
-        if ($request->has('cor') && !$request->has('nome')) {
-            // Atualização parcial (cor)
-            $request->validate([
-                'cor' => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
-            ]);
-            $paciente->update($request->only(['cor']));
-        } else {
-            // Atualização completa
-            $data = $request->validate([
-                'nome'     => 'required|string|max:255',
-                'cpf'      => 'required|string|max:14|unique:pacientes,cpf,' . $paciente->id,
-                'data_nascimento' => 'nullable|date',
-                'sus'      => 'required|string|max:20|unique:pacientes,sus,' . $paciente->id,
-                'telefone' => 'nullable|string|max:20',
-                'endereco' => 'nullable|string|max:255',
-                'cor'      => 'nullable|string|in:vermelho,laranja,amarelo,verde,azul,',
-                'consultorio' => 'nullable|string|max:255',
-                'doutor' => 'nullable|string|max:255',
-            ]);
-            $paciente->update($data);
-        }
+        $data = $request->validate([
+            'nome'     => 'required|string|max:255',
+            'cpf'      => 'required|string|max:14|unique:pacientes,cpf,' . $paciente->id,
+            'data_nascimento' => 'nullable|date',
+            'sus'      => 'required|string|max:20|unique:pacientes,sus,' . $paciente->id,
+            'telefone' => 'nullable|string|max:20',
+            'endereco' => 'nullable|string|max:255',
+        ]);
+
+        $paciente->update($data);
 
         return redirect()->route('pacientes.index')->with('success', 'Paciente atualizado com sucesso!');
     }

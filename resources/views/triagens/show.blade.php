@@ -69,28 +69,18 @@
             {{-- Gravidade --}}
             <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400 mb-6">
                 <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Gravidade</h3>
-                @php
-                    $colors = [
-                        'vermelho' => 'bg-red-500',
-                        'laranja' => 'bg-orange-500',
-                        'amarelo' => 'bg-yellow-400',
-                        'verde' => 'bg-green-500',
-                        'azul' => 'bg-blue-500',
-                    ];
-                    $gravidades = [
-                        'vermelho' => 'Emergência',
-                        'laranja' => 'Muito Urgente',
-                        'amarelo' => 'Urgente',
-                        'verde' => 'Pouco Urgente',
-                        'azul' => 'Não Urgente',
-                    ];
-                @endphp
-                <div class="flex items-center">
-                    <span class="px-4 py-2 text-white rounded-lg font-semibold {{ $colors[$triagem->gravidade] ?? 'bg-gray-300' }}">
-                        {{ ucfirst($triagem->gravidade) }}
-                    </span>
-                    <span class="ml-3 text-gray-700 dark:text-gray-300">{{ $gravidades[$triagem->gravidade] ?? 'Sem classificação' }}</span>
-                </div>
+                <form action="{{ route('triagens.update', [$paciente, $triagem]) }}" method="POST" class="flex items-center space-x-4">
+                    @csrf
+                    @method('PUT')
+                    <select name="gravidade" class="border border-gray-300 dark:border-gray-700 p-2 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        <option value="vermelho" {{ $triagem->gravidade == 'vermelho' ? 'selected' : '' }}>Emergente</option>
+                        <option value="laranja" {{ $triagem->gravidade == 'laranja' ? 'selected' : '' }}>Muito Urgente</option>
+                        <option value="amarelo" {{ $triagem->gravidade == 'amarelo' ? 'selected' : '' }}>Urgente</option>
+                        <option value="verde" {{ $triagem->gravidade == 'verde' ? 'selected' : '' }}>Pouco Urgente</option>
+                        <option value="azul" {{ $triagem->gravidade == 'azul' ? 'selected' : '' }}>Não Urgente</option>
+                    </select>
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">Atualizar Gravidade</button>
+                </form>
             </div>
 
             {{-- Data da triagem --}}
