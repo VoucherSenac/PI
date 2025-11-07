@@ -111,9 +111,9 @@
                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
                         </div>
                         <div>
-                            <label for="frequencia_respiratoria" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Freq. Respiratória (rpm) *</label>
+                            <label for="frequencia_respiratoria" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Freq. Respiratória (rpm)</label>
                             <input type="number" id="frequencia_respiratoria" name="frequencia_respiratoria" min="0" max="100"
-                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200" required>
+                                   class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
                         </div>
                     </div>
                 </div>

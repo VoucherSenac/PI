@@ -40,7 +40,11 @@ class ConsultaController extends Controller
         // Carregar consultas junto com paciente e médico
         $consultas = Consulta::with(['paciente', 'medico'])->get();
 
-        return view('consultas.index', compact('consultas'));
+        // Separar consultas agendadas e concluídas
+        $consultasAgendadas = $consultas->where('status', 'agendada');
+        $consultasConcluidas = $consultas->where('status', 'concluida');
+
+        return view('consultas.index', compact('consultasAgendadas', 'consultasConcluidas'));
     }
 
     public function atendimento(Paciente $paciente)
@@ -52,6 +56,34 @@ class ConsultaController extends Controller
         }
 
         return view('consultas.atendimento', compact('paciente', 'triagem'));
+    }
+
+    public function edit(Consulta $consulta)
+    {
+        $pacientes = Paciente::all();
+        $medicos = Medico::all();
+
+        return view('consultas.edit', compact('consulta', 'pacientes', 'medicos'));
+    }
+
+    public function update(Request $request, Consulta $consulta)
+    {
+        $request->validate([
+            'paciente_id' => 'required|exists:pacientes,id',
+            'medico_id' => 'required|exists:medicos,id',
+            'data_hora' => 'required|date',
+            'observacoes' => 'nullable|string',
+            'status' => 'required|in:agendada,concluida,cancelada',
+        ]);
+
+        $consulta->update($request->all());
+
+        return redirect()->route('consultas.index')->with('success', 'Consulta atualizada com sucesso!');
+    }
+
+    public function show(Consulta $consulta)
+    {
+        return view('consultas.show', compact('consulta'));
     }
 
     public function storeAtendimento(Request $request, Paciente $paciente)
@@ -79,7 +111,7 @@ class ConsultaController extends Controller
         ]);
 
         // Remover paciente da fila após atendimento
-        $paciente->update(['em_fila' => false]);
+        $paciente->update(['em_fila' => false, 'cor' => null]);
 
         return redirect()->route('pacientes.index')->with('success', 'Atendimento realizado com sucesso!');
     }

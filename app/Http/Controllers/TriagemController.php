@@ -50,7 +50,7 @@ class TriagemController extends Controller
             'temperatura' => 'required|numeric|min:0|max:99.9',
             'peso' => 'required|numeric|min:0|max:999.99',
             'altura' => 'required|numeric|min:0|max:9.99',
-            'frequencia_respiratoria' => 'required|integer|min:0|max:100',
+            'frequencia_respiratoria' => 'nullable|integer|min:0|max:100',
             'gravidade' => 'required|in:vermelho,laranja,amarelo,verde,azul',
             'consultorio_id' => 'nullable|exists:consultorios,id',
         ], [
@@ -86,7 +86,6 @@ class TriagemController extends Controller
             'altura.numeric' => 'A altura deve ser um número.',
             'altura.min' => 'A altura deve ser no mínimo 0.',
             'altura.max' => 'A altura deve ser no máximo 9.99.',
-            'frequencia_respiratoria.required' => 'A frequência respiratória é obrigatória.',
             'frequencia_respiratoria.integer' => 'A frequência respiratória deve ser um número inteiro.',
             'frequencia_respiratoria.min' => 'A frequência respiratória deve ser no mínimo 0.',
             'frequencia_respiratoria.max' => 'A frequência respiratória deve ser no máximo 100.',

@@ -66,6 +66,33 @@
                 <p class="mt-1 p-3 bg-gray-50 dark:bg-gray-700 rounded-md text-gray-900 dark:text-gray-200">{{ $triagem->medicamentos_uso ?: 'Não informado' }}</p>
             </div>
 
+            {{-- Sinais Vitais --}}
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-400 mb-6">
+                <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Sinais Vitais</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pressão Arterial</label>
+                        <p class="mt-1 text-gray-900 dark:text-gray-200">{{ $triagem->pressao_sistolica ?: 'Não informado' }}/{{ $triagem->pressao_diastolica ?: 'Não informado' }} mmHg</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Frequência Cardíaca</label>
+                        <p class="mt-1 text-gray-900 dark:text-gray-200">{{ $triagem->frequencia_cardiaca ?: 'Não informado' }} bpm</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Temperatura</label>
+                        <p class="mt-1 text-gray-900 dark:text-gray-200">{{ $triagem->temperatura ?: 'Não informado' }} °C</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Peso</label>
+                        <p class="mt-1 text-gray-900 dark:text-gray-200">{{ $triagem->peso ?: 'Não informado' }} kg</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Altura</label>
+                        <p class="mt-1 text-gray-900 dark:text-gray-200">{{ $triagem->altura ?: 'Não informado' }} m</p>
+                    </div>
+                </div>
+            </div>
+
             {{-- Gravidade --}}
             <div class="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-l-4 border-yellow-400 mb-6">
                 <h3 class="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-200">Gravidade</h3>

@@ -26,6 +26,10 @@ class Consulta extends Model
         'frequencia_respiratoria'
     ];
 
+    protected $casts = [
+        'data_hora' => 'datetime',
+    ];
+
     // Relacionamentos
     public function paciente()
     {
