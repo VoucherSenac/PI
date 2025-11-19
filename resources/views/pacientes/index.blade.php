@@ -77,7 +77,7 @@
                                             '' => 'Sem Triagem'
                                         ];
                                     @endphp
-                                    <span class="px-2 py-1 text-white rounded {{ $colors[$paciente->cor] ?? 'bg-gray-300' }}">
+                                    <span class="px-2 py-1 text-white rounded {{ $colors[$paciente->cor] ?? 'bg-gray-300' }}" style="white-space: nowrap;">
                                         {{ $gravidades[$paciente->cor] ?? 'Sem Triagem' }}
                                     </span>
                                 </td>
