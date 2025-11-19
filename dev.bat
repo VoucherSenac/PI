@@ -10,6 +10,9 @@ start cmd /c explorer "http://localhost:8000"
 echo Navegando para o diretorio do projeto...
 cd c:/Users/tlglab203/Documents/PI
 
+echo Executando key:generate...
+php artisan key:generate
+
 echo Executando migrations...
 php artisan migrate
 
